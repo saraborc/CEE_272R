@@ -6,10 +6,14 @@ Created on Fri May  8 16:37:59 2020
 @author: saraborchers
 """
 
+import pandapower as pp
+import pandapower.networks as nw
+
 print("YAY!!")
 print("Hi Sara!!") # @cmgeery
 
 # CREATE NETWORK: create network, establish ideal voltages by load type
+net = nw.case57()
 
 # ADJUST NETWORK LOADS: bump voltages in various areas according to scenarios
 # SCENARIO 1: increased home charging

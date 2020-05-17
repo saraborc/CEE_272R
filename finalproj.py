@@ -23,6 +23,7 @@ net = nw.case57()
 # SCENARIO 3: mix of quick charging and home charging
 
 
+# RUN OPF
 
 # CREATE DEMAND PROFILES: time series calculations/load changes with time
 

@@ -80,7 +80,27 @@ def plot_results():
 
 
 #Load IEEE 57 bus system (default)
-net = nw.case57(vn_kv_area1=115, vn_kv_area2=500, vn_kv_area3=138, vn_kv_area4=345, vn_kv_area5=230, vn_kv_area6=161) 
+#net = nw.case57(vn_kv_area1=115, vn_kv_area2=500, vn_kv_area3=138, vn_kv_area4=345, vn_kv_area5=230, vn_kv_area6=161) 
+net = nw.example_multivoltage() 
+
+gen_df = net.gen
+gen_df.insert(8, 'max_p_mw',[100],True)
+gen_df.insert(8, 'min_p_mw',[0],True)
+
+#Create cost functions
+costeg = pp.create_poly_cost(net, 0, 'ext_grid', cp1_eur_per_mw=10)
+costgen1 = pp.create_poly_cost(net, 0, 'gen', cp1_eur_per_mw=10)
+costgen2 = pp.create_poly_cost(net, 0, 'sgen', cp1_eur_per_mw=10)
+costgen3 = pp.create_poly_cost(net, 1, 'sgen', cp1_eur_per_mw=10)
+costgen4 = pp.create_poly_cost(net, 2, 'sgen', cp1_eur_per_mw=10)
+costgen5 = pp.create_poly_cost(net, 3, 'sgen', cp1_eur_per_mw=10)
+costgen6 = pp.create_poly_cost(net, 4, 'sgen', cp1_eur_per_mw=10)
+costgen7 = pp.create_poly_cost(net, 5, 'sgen', cp1_eur_per_mw=10)
+costgen8 = pp.create_poly_cost(net, 6, 'sgen', cp1_eur_per_mw=10)
+costgen9 = pp.create_poly_cost(net, 7, 'sgen', cp1_eur_per_mw=10)
+costgen10 = pp.create_poly_cost(net, 8, 'sgen', cp1_eur_per_mw=10)
+costgen11 = pp.create_poly_cost(net, 9, 'sgen', cp1_eur_per_mw=10)
+costgen12 = pp.create_poly_cost(net, 10, 'sgen', cp1_eur_per_mw=10)
 
 #Create empty lists for outputs that will be plotted
 trafo_mean_list = []

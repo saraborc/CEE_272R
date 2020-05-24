@@ -128,7 +128,7 @@ print_results(net)
 
 #Load the df of buses and associated hourly loads. Rows = buses, Cols = hours.
 #TODO: Conner is creating this df
-day_df = pd.read_csv('S1_012219')
+day_df = pd.read_csv('')
 
 #Create 0MW loads at all locations where chargers will be added
 for index, row in day_df.iterrows():

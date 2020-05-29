@@ -116,7 +116,7 @@ cost_list = []
 #Run OPF on unchanged default system
 pp.runopp(net,verbose=False)
 print("\nOPF Results with Unconstrained Default System \n")
-print_results(net)
+#print_results(net)
 
 #Set constraints. Optional. To leave unconstrained, set to None. 
 trafo_const = 90
@@ -128,25 +128,21 @@ set_constraints(trafo_const, line_const, min_v_pu, max_v_pu)
 #Rerun OPF with constraints
 pp.runopp(net)
 print("\nOPF Results with Default System + Constraints \n")
-print_results(net)
+#print_results(net)
 
 #Load the df of buses and associated hourly loads. Rows = buses, Cols = hours.
-#TODO: Conner is creating this df
-day_df = pd.DataFrame()
+day_df = pd.read_csv('S1_010219.csv',header = None)
 
-#Create 0MW loads at all locations where chargers will be added
-for index, row in day_df.iterrows():
-    pp.create_load(net, row['Bus'], p_mw=0, controllable=False)
 
 hours = list(day_df)
 #Iterate through each column (hour)
 for h in hours:
-    hour_df = day_df[['Bus', h]].copy() #Create a 2 col df of buses and loads for that hour
+    hour_df = day_df[h].copy() #Create a 2 col df of buses and loads for that hour
     change_loads(net, hour_df) #Change the loads on the network accordingly
     pp.runopp(net) #Run OPF for that hour
     print_results(net)
-
-plot_results()
+#
+#plot_results()
 
 #TODO: We should be adjusting ALL loads to be time series
 #
@@ -157,3 +153,10 @@ plot_results()
 #
 #
 #
+
+
+#############DUMP#######
+#Create 0MW loads at all locations where chargers will be added
+#for idx in range(len(day_df.index)):
+#    pp.create_load(net, idx, p_mw=0, controllable=False)
+
